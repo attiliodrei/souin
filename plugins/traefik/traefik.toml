@@ -1,0 +1,40 @@
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+
+  [entryPoints.metrics]
+      address = ":8090"
+
+[metrics.prometheus]
+  entryPoint = "metrics"
+
+[api]
+    dashboard = true
+    insecure  = true
+[ping]
+  entryPoint = "http"
+[providers]
+
+ [file]
+    filename="/souin-configuration.yaml"
+    watch= true
+    
+[providers.consulCatalog]
+    prefix           = "traefik"
+    exposedByDefault = false
+    connectaware=true 
+ connectbydefault=true 
+[providers.consulCatalog.endpoint]
+      address = "127.0.0.1:8500"
+      scheme  = "http"
+[log]
+  level = "DEBUG"
+  
+[experimental]
+   [experimental.localPlugins]
+     [experimental.localPlugins.souin]
+       moduleName = "github.com/darkweak/souin"
+
+[pilot]
+  token="2dfb46d0-ad2a-4792-8b8e-8305dbc4e212"
+  
